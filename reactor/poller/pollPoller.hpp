@@ -4,6 +4,7 @@
 #include <poll.h>
 
 #include <vector>
+#include <iostream>
 
 #include "channel.h"
 #include "eventLoop.h"
@@ -27,17 +28,19 @@ class pollPoller : public Poller {
         auto now = std::chrono::system_clock::now();
         int saveError = errno;
         if (numEvents > 0) {
-            for (int i = 0; i < _pollfds.size(); i++) {
+            for (size_t i = 0; i < _pollfds.size(); i++) {
                 if (_pollfds[i].revents > 0) {
+                    _channelMap[_pollfds[i].fd]->setREvent(_pollfds[i].revents);
                     activeChannels.push_back(_channelMap[_pollfds[i].fd]);
                 }
             }
         } else if (numEvents < 0) {
+            std::cerr<<"error in poll:"<<saveError<<std::endl;
             if (saveError != EINTR) {
                 errno = saveError;
             }
         } else {
-            ;
+            std::cout<<"zero numEvents"<<std::endl;
         }
         return now;
     }

@@ -43,7 +43,7 @@ class Channel {
     void setReadCallback(
         std::function<void(const std::chrono::system_clock::time_point)> cb) {
         _readcb = std::move(cb);
-        if (cb)
+        if (_readcb)
             _event |= POLLIN | POLLPRI;
         else
             _event &= ~(POLLIN | POLLPRI);
@@ -51,7 +51,7 @@ class Channel {
     }
     void setWriteCallback(std::function<void()> cb) {
         _writecb = std::move(cb);
-        if (cb)
+        if (_writecb)
             _event |= POLLOUT;
         else
             _event &= ~POLLOUT;

@@ -18,7 +18,7 @@ class Poller {
    public:
     Poller(EventLoop* loop) : _loop(loop) {}
 
-    virtual ~Poller() = 0;
+    virtual ~Poller() {};
     virtual std::chrono::system_clock::time_point poll(
         std::chrono::system_clock::duration timeout,
         std::vector<Channel*>& activeChannels) = 0;
