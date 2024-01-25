@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   string files;
-  //char buf[PIPE_BUF];
+  // char buf[PIPE_BUF];
   char buf[10];
   for (int i = 1; i < argc; i++) {
     files += string(argv[i]) + " ";
@@ -21,9 +21,12 @@ int main(int argc, char *argv[]) {
     perror("popen");
     exit(1);
   }
-  while (fgets(buf, sizeof(buf), fp) != NULL) {
-    std::cout << buf;
-    std::flush(std::cout);
-  }
+  // while (fgets(buf, sizeof(buf), fp) != NULL) {
+  //   std::cout << buf;
+  //   std::flush(std::cout);
+  // }
   pclose(fp);
+  std::cout << "end" << endl;
+  while (true)
+    ;
 }

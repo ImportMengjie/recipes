@@ -32,5 +32,5 @@ class EventLoop {
     std::atomic<bool> _quit;
     std::vector<Channel*> _activeChannel;
 };
-};  // namespace reactor
-};  // namespace mengjie
+}  // namespace reactor
+}  // namespace mengjie
