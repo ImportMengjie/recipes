@@ -7,7 +7,7 @@ time_t normalize_ts(struct tm timeinfo) {
   timeinfo.tm_hour = 0;
   timeinfo.tm_min = 0;
   timeinfo.tm_sec = 0;
-  return mktime(&timeinfo) - days_until_monday * 24 * 3600;
+  return timegm(&timeinfo) - days_until_monday * 24 * 3600;
 }
 
 // 打印 GMT 时间
@@ -19,7 +19,9 @@ void printGMTTime(const struct tm &timeinfo) {
 
 // 测试函数
 void testNormalizeTime() {
-  time_t now_time = time(NULL);
+  // time_t now_time = time(NULL);
+  time_t now_time = 1718611241;
+  now_time += -10*60*60;
 
   struct tm inputTimeinfo;
   gmtime_r(&now_time, &inputTimeinfo);

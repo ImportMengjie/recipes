@@ -21,10 +21,10 @@ int main(int argc, char *argv[]) {
     perror("popen");
     exit(1);
   }
-  // while (fgets(buf, sizeof(buf), fp) != NULL) {
-  //   std::cout << buf;
-  //   std::flush(std::cout);
-  // }
+  while (fgets(buf, sizeof(buf), fp) != NULL) {
+    std::cout << buf;
+    std::flush(std::cout);
+  }
   pclose(fp);
   std::cout << "end" << endl;
   while (true)
